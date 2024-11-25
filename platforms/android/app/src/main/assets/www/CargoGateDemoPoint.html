@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/jquery-1.12.0.min.js"></script>
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <script src="scripts/LoadingModel.js"></script>
+    <script src="scripts/LoaderShow-Hide.js"></script>
+    <script src="scripts/Login.js"></script>
+    <script src="scripts/dialog.js"></script>
+    <script src="js/General.js"></script>
+    <link href="css/General.css" rel="stylesheet" />
+    <script src="scripts/alert.mob.js"></script>
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/dialog.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <script src="js/amplify.min.js"></script>
+    <script src="js/CargoGateDemoPoint.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header" style="background-color:#065da1;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" id="btnnavbar"
+                    data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" id="navhdrName" style="text-align:right;"></a>
+                <img class="navbarImage" src="images/Logo.png" onclick="ShowHomePage();">
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top:63px;">
+        <div class="panel-body">
+            <div class="panel panel-widget forms-panel form-grids widget-shadow">
+                <div class="forms">
+                    <div class="form-body">
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblScanULD" for="txtScanCode">Scan ULD</label>
+                                    </div>
+                                    <!--<div class="col-xs-6" style="padding-left:0px;padding-right:0px;">-->
+                                    <div class="col-xs-4" style="padding-left:0px;padding-right:0px;">
+                                        <!--<input id="txtScanCode" class="form-control" type="text" onblur="ValidateAWB();" >-->
+                                        <input id="txtScanCode" class="form-control" type="text"
+                                            oninput="ChkAndValidate();">
+                                    </div>
+                                    <div class="col-xs-2" style="padding-left:0px;padding-right:0px;">
+                                        <input type="button" id="btnClearAll" class="form-control ButtonColor"
+                                            value="Clear" onclick="clearALL();">
+                                    </div>
+                                </div>
+
+                                <!-- <div id="divbooked" class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                <div class="col-xs-6 col-form-label">
+                                    <label id="lblULD">ULD's</label>
+                                    <font color="red">*</font>
+                                </div>
+                                <div class="col-xs-6 NoPadding">
+                                    <select class="form-control" id="ddlAWBGridULD" onchange="GetAvailableAWBgrid();">
+                                    </select>
+                                </div>
+                            </div> -->
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblULDNo" for="txtAWBNo">ULD No.</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-2" style="padding-left:0px;padding-right:5px;">
+                                        <input id="txtAWBPrefix" class="form-control" type="number"
+                                            style="text-align:right;"
+                                            onkeyup="NumberOnly(event); MovetoNext(this, 'txtAWBNo');" maxlength="3">
+                                    </div>
+                                    <div class="col-xs-2" style="padding-left:0px;padding-right:5px;">
+                                        <input id="txtAWBNo" class="form-control" type="number"
+                                            style="text-align:right;"
+                                            onkeyup="NumberOnly(event); ChkMaxLength(this, '8');"
+                                            onchange="GetShipmentInfoForAWB($('#txtAWBNo').val());">
+                                    </div>
+                                    <div class="col-xs-2" style="padding-left:0px;padding-right:5px;">
+                                        <input id="txtAWBNo" class="form-control" type="number"
+                                            style="text-align:right;"
+                                            onkeyup="NumberOnly(event); ChkMaxLength(this, '8');"
+                                            onchange="GetShipmentInfoForAWB($('#txtAWBNo').val());">
+                                    </div>
+                                    <!--<div class="col-xs-1" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtPriorityCode" class="form-control" type="number" style="text-align:right;" onkeyup="NumberOnly(event); ChkMaxLength(this, '3');">
+                                        <input id="txtPriorityCode" class="form-control" type="text" maxlength="2" disabled>
+                                    </div>-->
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblPieces" for="txtScanCode">Pieces</label>
+                                    </div>
+                                    <div class="col-xs-4" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtPieces" class="form-control" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblWeight" for="txtScanCode">Weight</label>
+                                    </div>
+                                    <div class="col-xs-4" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtWeight" class="form-control" type="text">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <!-- <div id="divShowGrid" class="form-group col-xs-12 col-sm-12 col-md-12 NoPadding">
+                                </div> -->
+                                <div id="divShowGrid" class="form-group col-xs-12 col-sm-12 col-md-12 NoPadding">
+                                    <table id="tblNews" border="1"
+                                        style="width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;">
+                                        <thead>
+                                            <tr>
+                                                <th height="30"
+                                                    style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px; width:20%"
+                                                    align="center" font-weight:'bold'="">Move</th>
+                                                <th height="30"
+                                                    style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px"
+                                                    align="center" font-weight:'bold'="">Location</th>
+                                                <th height="30"
+                                                    style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px; display:none;"
+                                                    align="center" font-weight:'bold'="">Location</th>
+                                                <th height="30"
+                                                    style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px; width:20%"
+                                                    align="center" font-weight:'bold'="">Pieces</th>
+                                                <th height="30"
+                                                    style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px; width:20%; display:none;"
+                                                    align="center" font-weight:'bold'="">HidePcs</th>
+                                                <th height="30"
+                                                    style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px; width:30%"
+                                                    align="center" font-weight:'bold'="">Weight</th>
+                                                <th height="30"
+                                                    style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px; width:30%; display:none;"
+                                                    align="center" font-weight:'bold'="">HideWeight</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td height="30" onclick="GetMeetingByNo(abc)"
+                                                    style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px"
+                                                    align="center"> <img id="imgMove_0" src="images/Move.png"
+                                                        onclick="MoveToLocation(0);"></td>
+                                                <td height="30" onclick="GetMeetingByNo(abc)"
+                                                    style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px"
+                                                    align="center"><input id="txtLocLoca_0" class="form-control"
+                                                        type="text" style="text-align:right;" value=""></td>
+                                                <td height="30" onclick="GetMeetingByNo(abc)"
+                                                    style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px; display:none;"
+                                                    align="center"><input id="txtLocSeq_0" class="form-control"
+                                                        type="text" style="text-align:right;" value=""></td>
+                                                <td height="30" onclick="GetMeetingByNo(abc)"
+                                                    style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px"
+                                                    align="center"><input id="txtLocPcs_0" class="form-control"
+                                                        type="number" style="text-align:right;" value=""
+                                                        onchange="CalculateWtVol(0);"></td>
+                                                <td height="30" onclick="GetMeetingByNo(abc)"
+                                                    style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px; display:none;"
+                                                    align="center"><input id="txtHideLocPcs_0" class="form-control"
+                                                        type="number" style="text-align:right;" value=""></td>
+                                                <td height="30" onclick="GetMeetingByNo(abc)"
+                                                    style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px"
+                                                    align="center"><input id="txtLocWt_0" class="form-control"
+                                                        type="number" style="text-align:right;" value=""></td>
+                                                <td height="30" onclick="GetMeetingByNo(abc)"
+                                                    style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px; display:none;"
+                                                    align="center"><input id="txtHideLocWt_0" class="form-control"
+                                                        type="number" style="text-align:right;" value=""></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12">
+                                    <a href="#" class="btn btn-success btn-xs" style="float:right;"
+                                        onclick="AddLocation();">
+                                        <span class="glyphicon glyphicon-plus-sign" id="lblAddLocation"
+                                            style="float: right;padding-top: 2px;"></span>Add Location&nbsp;
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row form-group" style="margin-top:10px;">
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnExcLanded" class="form-control ButtonColor" value="Exit"
+                                        onclick="window.location.href = 'IMP_Dashboard.html'">
+                                </div>
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnModify" class="form-control ButtonColor" value="Submit"
+                                        onclick="SaveDetails();">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <footer class="footer" style="color: white; font-size :12px; background-color:#0967b0;">
+            <div class="container">
+                <center>
+                    <p class="text-muted" id="RightsReserved"></p>
+                </center>
+            </div>
+        </footer>
+    </div>
+</body>
+<script language="javascript" type="text/javascript">
+    $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+</script>
+
+</html>

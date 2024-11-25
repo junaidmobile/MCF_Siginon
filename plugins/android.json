@@ -1,0 +1,36 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-barcodescanner": {
+      "PACKAGE_NAME": "com.GALAXY"
+    },
+    "cordova-plugin-bluetooth-serial": {
+      "PACKAGE_NAME": "com.GALAXY"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.GALAXY"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.GALAXY"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.GALAXY"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.GALAXY"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.GALAXY"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.GALAXY"
+    }
+  },
+  "dependent_plugins": {}
+}

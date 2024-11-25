@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        padding-top: 100px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 90%;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .dim_input {
+        height: 20px;
+        width: 40px;
+    }
+
+    .table {
+        border: solid 1px black !important;
+        height: 130px;
+        width: 100%;
+    }
+
+    .td,
+    th {
+        height: 25px !important;
+        border: solid 1px black !important;
+    }
+
+    .th {
+        border: solid 1px black !important;
+    }
+
+    .tr,
+    td {
+        border: solid 1px black !important;
+    }
+
+    .textpackges {
+        width: 100%;
+    }
+
+    .navbar-inverse {
+        background-color: #0967b0 !important;
+    }
+</style>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/jquery-1.12.0.min.js"></script>
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <script src="scripts/LoadingModel.js"></script>
+    <script src="scripts/LoaderShow-Hide.js"></script>
+    <script src="scripts/Login.js"></script>
+    <script src="scripts/dialog.js"></script>
+    <script src="js/General.js"></script>
+    <link href="css/General.css" rel="stylesheet" />
+    <script src="scripts/alert.mob.js"></script>
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/dialog.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <script src="js/amplify.min.js"></script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar" style="  height: 50px;
+  line-height:50px;
+  text-align: center;font-size:20px;color:#ffffff;">
+        Read Data
+    </nav>
+
+    <div class="container-fluid" style="margin-top:63px;">
+        <div class="panel-body">
+            <div class="panel panel-widget forms-panel form-grids widget-shadow">
+                <div class="forms">
+
+
+
+                    <div id="connectionScreen" class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                        <ul id="deviceList" class="topcoat-list"></ul>
+                        <div style="margin: 10px" class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                            <button class="topcoat-button" id="refreshButton">Refresh</button>
+                        </div>
+                    </div>
+                    <div id="">
+                        <div style="margin: 10px">
+                            <button class="topcoat-button" id="readButton">Read Data</button>
+                        </div>
+                        <div class="">
+                            <textarea style="height: 100px; width: 250px;" id="txtData"></textarea>
+                            <!--<input type="text" style="height: 100px; width: 250px;" id="txtData">-->
+                        </div>
+                    </div>
+                    <div id="colorScreen">
+                        <div>
+                            Use sliders to set color.
+                        </div>
+                        <div class="rangeDiv">
+                            <input type="range" min="0" max="255" value="0" name="red" id="red" class="topcoat-range" />
+                        </div>
+                        <div class="rangeDiv">
+                            <input type="range" min="0" max="255" value="0" name="green" id="green" class="topcoat-range" />
+                        </div>
+                        <div class="rangeDiv">
+                            <input type="range" min="0" max="255" value="0" name="blue" id="blue" class="topcoat-range" />
+                        </div>
+                        <div id="rgbText">
+                            &nbsp;
+                        </div>
+                        <div id="previewColor">
+                        </div>
+                        <p>
+                            <a class="topcoat-button--large" id="disconnectButton">Disconnect</a>
+                        </p>
+                    </div>
+                    <div id="messageDiv">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/underscore-min.js"></script>
+
+    <script src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+</body>
+<script language="javascript" type="text/javascript">
+    $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+
+</script>
+
+</html>

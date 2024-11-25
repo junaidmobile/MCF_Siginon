@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0">
+    <meta charset="utf-8">
+    <title>GalaxyMobileApplication</title>
+    <style>
+        #APPContent {
+            background-color: #065da1;
+        }
+
+        .add-clear-x {
+            color: transparent;
+        }
+
+        .glyphicon-remove-circle {
+            color: rgba(0, 0, 0, 0) !important;
+        }
+
+        /*.has-feedback .form-control {
+            border-radius: 15px;
+        }
+
+        .ButtonColor {
+            border-radius: 15px !important;
+        }*/
+        audio,
+        canvas,
+        progress,
+        video {
+            padding-left: 10px !important;
+        }
+    </style>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <!--<script src="scripts/winstore-jscompat.js"></script>-->
+    <script src="scripts/jquery-1.12.0.min.js"></script>
+    <!--<script type="text/javascript">
+    jQuery.isUnsafe = true;
+    </script>-->
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" />
+    <!--<script src="scripts/Jquery-Mobile-1.4.5.js"></script>-->
+    <script src="scripts/LoadingModel.js"></script>
+    <script src="scripts/LoaderShow-Hide.js"></script>
+    <script src="scripts/dialog.js"></script>
+    <script src="scripts/alert.mob.js"></script>
+    <!--<link href="css/jqueryMobile_1.4.5.min.css" rel="stylesheet" />-->
+    <link href="css/custom.css" rel="stylesheet" />
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/dialog.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <link href="css/Common.css" rel="stylesheet" />
+    <link href="css/General.css" rel="stylesheet" />
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <script src="scripts/bootstrap-add-clear.js"></script>
+    <script src="js/aes.js"></script>
+    <script src="js/General.js"></script>
+    <script src="js/Login.js"></script>
+</head>
+
+<!--<body style="background-color:#065da1;">-->
+<body style="background-color: #065da1; overflow: hidden; ">
+
+
+    <div class="container-fluid" style="margin-top:30px;">
+        <div class="panel-body" style="box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);background-color:#fff;border-radius:10px;">
+            <div class="panel panel-widget forms-panel form-grids widget-shadow">
+                <div class="forms">
+                    <div class="form-body">
+                        <form class="form-inline">
+                            <div class="row">
+                                <!--<center><img src="images/MABB_NEW.png" style="width:78%;margin-top: 8px;" /></center>-->
+                                <center><img src="images/LoginTopSreen.png" style="margin-top: 8px; width: 90%; border-radius: 10px; height: 100px;" /></center>
+                            </div>
+                        </form>
+                        <form role="form">
+
+                            <div class="add-clear-span form-group has-feedback" style="margin-top: 13px;">
+                                <input class="form-control" style="height:35px;font-size:medium;text-transform: none !important;"
+                                       type="text" id="txtUserName" oninput="userNameCheckSpecialChar();" placeholder="Enter User ID" autofocus>
+                            </div>
+
+
+                            <div class=" form-group has-feedback ">
+                                <input class="form-control" style="height:35px;font-size:medium;text-transform: none !important;"
+                                       type="password" id="txtPassword" placeholder="Enter Password">
+                                <span class=" form-control-feedback glyphicon glyphicon-eye-open" style=" cursor: pointer; text-decoration: none; overflow: hidden;
+            position: absolute; pointer-events: auto; right: 0px;  z-index: 100;" onclick="viewPassword();">
+                                </span>
+
+                            </div>
+
+                            <div class="checkbox">
+                                <input id="chkRemember" type="checkbox" style="margin-left: 0px;">
+                                <label style="" id="lblrememberme">Remember Me</label>
+                            </div>
+
+                            <div class="row form-group NoPadding" style="margin-top:10px;">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6">
+                                    <div class="col-xs-4 NoPadding">
+                                        <select class="form-control" id="ddlLanguage">
+                                            <option value="0">English</option>
+                                            <option value="1">German</option>
+                                            <option value="1">Russian</option>
+                                            <option value="1">Turkish</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-8 NoPadding">
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row" style="margin-top:5px;">
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                                    <input class="form-control btn-success btn-block hvr-glow ButtonColor"
+                                           style="height:35px;font-size:medium" value="Exit" type="button" id="ExitBtn"
+                                           onclick="exitFromApp();" />
+                                </div>
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                                    <input class="form-control btn-success btn-block hvr-glow ButtonColor"
+                                           style="height:35px;font-size:medium" value="Login" type="button" id="LoginBtn"
+                                           onclick="ShowLoader(); RememberCheck(); ProcessLogin(); " />
+                                </div>
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4">
+                                    <input class="form-control btn-success btn-block hvr-glow ButtonColor"
+                                           style="height:35px;font-size:medium" value="Clear" type="button" id="ClearBtn"
+                                           onclick="clearALL();" />
+                                </div>
+                            </div>
+
+                        </form>
+                        <center>
+                            <label style="font-size:12px;">App Version 1.0.0</label>
+                        </center>
+                        <center>
+                            <label style="font-size:10px;">Powered by Kale Logistics Solutions Private Limited</label>
+                        </center>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    <form class="form-inline">
+        <div class="row">
+            <center><img src="images/LoginBottomScreen.png" style="width: 90%; height: 375px;" /></center>
+        </div>
+    </form>
+
+    <div>
+        <footer class="footer" style="color: white; font-size :12px; background-color:#065da1;">
+            <div class="container">
+                <center><p class="text-muted" id="RightsReserved"></p></center>
+            </div>
+        </footer>
+    </div>
+</body>
+<!--<script language="javascript" type="text/javascript">
+    $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+</script>-->
+
+</html>

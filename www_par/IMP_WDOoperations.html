@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/jquery-1.12.0.min.js"></script>
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <script src="scripts/LoadingModel.js"></script>
+    <script src="scripts/LoaderShow-Hide.js"></script>
+    <script src="scripts/Login.js"></script>
+    <script src="scripts/dialog.js"></script>
+    <script src="js/General.js"></script>
+    <link href="css/General.css" rel="stylesheet" />
+    <script src="scripts/alert.mob.js"></script>
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/dialog.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <script src="js/amplify.min.js"></script>
+    <script src="js/Import/IMP_WDOoperations.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header" style="background-color:#065da1;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" id="btnnavbar"
+                    data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" id="navhdrName" style="text-align:right;"></a>
+                <img class="navbarImage" src="images/Logo.png" onclick="ShowHomePage();">
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top:63px;">
+        <div class="panel-body">
+            <div class="panel panel-widget forms-panel form-grids widget-shadow">
+                <div class="forms">
+                    <div class="form-body">
+                        <form>
+                            <div class="row">
+                                <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                <div class="col-xs-6 col-form-label">
+                    <label id="lblRotationNo" for="txtRotationNo">Rotation No.</label>
+                    <font color="red">*</font>
+                </div>
+                <div class="col-xs-6 NoPadding">
+                    <input id="txtRotationNo" class="form-control" type="text" maxlength="20" oninput="ChkAndValidate();">
+                </div>
+            </div>-->
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblWDO" for="ddlWDO" class="control-label labelFont">WDO No.</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtWDONo" class="form-control" type="text" maxlength="20"
+                                            oninput="ChkAndValidate();">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblddlAWB" for="ddlAWB">AWB List</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <select class="form-control" id="ddlAWB" onchange="GetWDOdetails();">
+                                            <!--<option value="0">Select</option>-->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblAWB" for="txtAWBNo" class="control-label labelFont">AWB
+                                            No.</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <!--<input id="txtAWBNo" class="form-control" style="text-align:right;" disabled >-->
+                                        <input id="txtAWBNo" class="form-control" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblHAWB" for="ddlHAWB" class="control-label labelFont">HAWB
+                                            No.</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtHAWBNo" class="form-control" type="text" maxlength="20" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblPcs" for="txtPcs" class="control-label labelFont">Pcs</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtPcs" class="form-control" type="number" maxlength="20"
+                                            onchange="CalculateWtVol();" onkeyup="NumberOnlytxtPkg('txtPcs');">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblWt" for="txtWt" class="control-label labelFont">Weight</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtWt" class="form-control" type="number" maxlength="20">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblLocationCode" for="txtLocationCode">Location Code</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtLocation" class="form-control" type="text" maxlength="20"
+                                            disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblCustomRefNo" for="txtCustomRefNo">Custom Reference No.</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtCustomRefNo" class="form-control" type="text" maxlength="20">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <input type="radio" name="radSize" id="rdoDeliver" value="Deliver"
+                                        checked="checked" />
+                                    <label id="lblDeliver" for="sizeLarge">Deliver</label>
+                                    <!--<input type="radio" name="radSize" id="rdoOOW" value="OOW" />
+                <label for="sizeSmall">OOW</label>
+                <input type="radio" name="radSize" id="rdoCR" value="CR" />
+                <label for="sizeMed">CR</label>-->
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-12 col-md-12 NoPadding">
+                                    <canvas style="height:50%; width:50%"></canvas>
+                                </div>
+                            </div>
+
+
+                            <div class="row form-group" style="margin-top:10px;">
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnExcLanded" class="form-control ButtonColor" value="Exit"
+                                        onclick="window.location.href = 'IMP_Dashboard.html'">
+                                </div>
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnModify" class="form-control ButtonColor" value="Submit"
+                                        onclick="SaveDetails();">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-widget forms-panel form-grids widget-shadow" id="divAddAWBDetails"
+                style="display:none">
+                <div class="forms">
+                    <div class="form-body">
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-12 col-md-12 NoPadding">
+                                    <div class="col-xs-12 col-form-label" style="text-align:center;">
+                                        <label id="lblPartShipment" class="control-label labelFont">Re-locate pending
+                                            pieces</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblpartPcs" for="txtpartPcs"
+                                            class="control-label labelFont">Pcs</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtpartPcs" class="form-control" type="number" maxlength="20"
+                                            disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblpartWt" for="txtpartWt"
+                                            class="control-label labelFont">Weight</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtpartWt" class="form-control" type="number" maxlength="20"
+                                            disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblpartLocationCode" for="txtpartLocation">Location Code</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input id="txtpartLocation" class="form-control" type="text" maxlength="20">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group" style="margin-top:10px;">
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnpartExcLanded" class="form-control ButtonColor"
+                                        value="Exit" onclick="window.location.href = 'IMP_Dashboard.html'">
+                                </div>
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnpartModify" class="form-control ButtonColor"
+                                        value="Submit" onclick="SavePartShipmentDetails();">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div>
+        <footer class="footer" style="color: white; font-size :12px; background-color:#0967b0;">
+            <div class="container">
+                <center>
+                    <p class="text-muted" id="RightsReserved"></p>
+                </center>
+            </div>
+        </footer>
+    </div>
+</body>
+<script language="javascript" type="text/javascript">
+    $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+</script>
+
+</html>

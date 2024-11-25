@@ -1,0 +1,679 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/jquery-1.12.0.min.js"></script>
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/sticky-footer.css" rel="stylesheet" />
+    <script src="scripts/LoadingModel.js"></script>
+    <script src="scripts/jquery.multiselect.js"></script>
+    <!--<script src="scripts/jquerysumoselect.js"></script>-->
+    <script src="scripts/LoaderShow-Hide.js"></script>
+    <script src="scripts/Login.js"></script>
+    <script src="scripts/dialog.js"></script>
+    <script src="scripts/jquerysumoselect.js"></script>
+    <script src="scripts/analytics.js"></script>
+    <script src="js/General.js"></script>
+    <link href="css/General.css" rel="stylesheet" />
+    <script src="scripts/alert.mob.js"></script>
+    <link href="css/Loader.css" rel="stylesheet" />
+    <link href="css/dialog.css" rel="stylesheet" />
+    <link href="css/alert.mob.css" rel="stylesheet" />
+    <script src="js/amplify.min.js"></script>
+    <link href="css/sumoselect.css" rel="stylesheet" />
+    <script src="js/Import/IMP_ShipmentArrival.js"></script>
+    <link href="css/jquery.multiselect.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header" style="background-color:#065da1;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" id="btnnavbar"
+                    data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" id="navhdrName" style="text-align:right;"></a>
+                <img class="navbarImage" src="images/Logo.png" onclick="ShowHomePage();">
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top:63px;">
+        <div class="panel-body">
+            <div class="panel panel-widget forms-panel form-grids widget-shadow" id="divFlightDetails">
+                <div class="forms">
+                    <div class="form-body">
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblFlightNo" for="txtFlightNo" class="control-label">Flight
+                                            No.</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-3 NoPadding ClearFields">
+                                        <input type="text" id="txtFlightPrefix" class="form-control"
+                                            onkeyup="MovetoNext(this, 'txtFlightNo');" autofocus maxlength="2">
+                                    </div>
+                                    <div class="col-xs-3 NoPadding ClearFields">
+                                        <input type="number" id="txtFlightNo" class="form-control"
+                                            style="text-align:right;" onkeyup="ChkMaxLength(this, '5');">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label for="txtFltDate" id="lblFlightDate">Flight Date</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding ClearFields">
+                                        <input type="date" id="txtFlightDate" class="form-control" title="Date">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="row form-group" style="margin-top:5px;">
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                        </div>
+                                        <div class="form-group col-xs-5 col-sm-4 col-md-4">
+                                            <input type="button" id="btnGetDetail" class="form-control ButtonColor"
+                                                value="Get Details" onclick="GetULDDetails();">
+                                        </div>
+                                        <div class="form-group col-xs-1 col-sm-4 col-md-4">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-widget forms-panel form-grids widget-shadow" style="margin-top:5%"
+                id="divULDDetails">
+                <div class="forms">
+                    <div class="form-body">
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblULDNo" for="txtULDNo" class="control-label labelFont">ULD
+                                            No.</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <select class="form-control" id="ddlULDNo"
+                                            onchange="GetAWBDetails($('#ddlULDNo').find('option:selected').text())">
+                                            <option value="0">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblAwbNo" for="txtAwbNo" class="control-label labelFont">AWB
+                                            No.</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <select class="form-control" id="ddlAWBNo"
+                                            onchange="GetHAWBDetails($('#ddlAWBNo').find('option:selected').text())">
+                                            <option value="0">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblHAWBNo" for="ddlHAWBNo" class="control-label labelFont">HAWB No.</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <select class="form-control" id="ddlHAWBNo">
+                                            <option value="0">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblDamagePkgs" for="txtDamagePkgs"
+                                            class="control-label labelFont">Pkgs</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="number" style="text-align:right;" id="txtPkgs" class="form-control"
+                                            onchange="CalculateWtVol();"
+                                            onkeyup="NumberOnlytxtPkg('txtPkgs'); ChkMaxLength(this, '7');">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblDamageWt" for="txtDamageWt"
+                                            class="control-label labelFont">Weight</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="number" style="text-align:right;" id="txtWt" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblSHC" for="txtSHC" class="control-label labelFont">SHC</label>
+
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="text" style="text-align:right;" id="txtSHC" class="form-control"
+                                            disabled>
+                                    </div>
+                                </div>
+                                <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblDamageType" for="ddlDamageType" class="control-label labelFont">Damage Type</label>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <select class="form-control" id="ddlDamageType">
+                                            <option value="0">Select</option>'
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <input type="text" id="txtDamageType" class="form-control">
+                                    </div>
+                                </div>-->
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-12 col-md-12 NoPadding">
+                                    <div class="col-xs-12 NoPadding">
+                                        <input type="text" id="txtRemarks" class="form-control" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label class="checkbox-inline"><input type="checkbox" id="chkDamage">Is
+                                            Damage</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-5 col-form-label">
+                                        <label class="checkbox-inline"><input type="checkbox" id="chkArrived">Arrived</label>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="row form-group" style="margin-top:10px;">
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnFoundCargo" class="form-control ButtonColor"
+                                        value="Found Cargo" onclick="ShowAddFoundCargoGrid();">
+                                </div>
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnULDAccessory" class="form-control ButtonColor"
+                                        value="ULD Accessory" onclick="ShowAddULDAccesoryGrid();">
+                                </div>
+                            </div>
+                            <div class="row form-group" style="margin-top:10px;">
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnExcLanded" class="form-control ButtonColor" value="Exit"
+                                        onclick="window.location.href = 'IMP_Dashboard.html'">
+                                </div>
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnModify" class="form-control ButtonColor" value="Submit"
+                                        onclick="SaveDetails();">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-widget forms-panel form-grids widget-shadow" id="divAddULDAccessories"
+                style="display:none">
+                <div class="forms">
+                    <div class="form-body">
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblULDAccessories" for="txtAccessoryULDNo">ULD No.</label>
+                                    </div>
+                                    <div class="col-xs-6" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtAccessoryULDNo" class="form-control" type="text" maxlength="6"
+                                            disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblMaterialType">Material Type</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-6 NoPadding">
+                                        <select class="form-control" id="ddlMaterialType" onchange="GetMaterialUsed();">
+                                            <!--<option value="0">Select</option>-->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblNoOfUnitsAccessories" for="txtNoUnits">No.of Units.</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-4" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtNoUnits" class="form-control" type="number"
+                                            style="text-align:right;"
+                                            onkeyup="NumberOnly(event); ChkMaxLength(this, '9');">
+                                    </div>
+                                    <!--<div class="col-xs-2 NoPadding">
+                                        <select class="form-control" id="ddlGrossWtUnit">
+                                            <option value="0">KG</option>
+                                        </select>
+                                    </div>-->
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 5px;">
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnSave" class="form-control ButtonColor" value="Submit"
+                                        onclick="SaveMaterialUsed();">
+                                </div>
+
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnExit" class="form-control ButtonColor" value="Back"
+                                        onclick="ShowULDGridFromULDAccessory();">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-widget forms-panel form-grids widget-shadow" id="divAddFoundCargo"
+                style="display:none">
+                <div class="forms">
+                    <div class="form-body">
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblULDFoundCargo" for="txtULDNo_FC">ULD No.</label>
+                                    </div>
+                                    <div class="col-xs-6" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtULDNo_FC" class="form-control" type="text" maxlength="6" disabled>
+                                    </div>
+                                </div>
+
+                                <!--<div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label for="txtAWB_FC">AWB No.</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-6" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtAWB_FC" class="form-control" type="number" style="text-align:right;" onkeyup="NumberOnly(event); ChkMaxLength(this, '11');">
+                                    </div>
+                                </div>-->
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblScanAWBFoundCargo" for="txtScanCode">Scan AWB</label>
+                                    </div>
+                                    <!--<div class="col-xs-6" style="padding-left:0px;padding-right:0px;">-->
+                                    <div class="col-xs-4" style="padding-left:0px;padding-right:0px;">
+                                        <!--<input id="txtScanCode" class="form-control" type="text" onblur="ValidateAWB();" >-->
+                                        <input id="txtScanCode" class="form-control" type="text"
+                                            oninput="ChkAndValidate();">
+                                    </div>
+                                    <div class="col-xs-2" style="padding-left:0px;padding-right:0px;">
+                                        <input type="button" id="btnClearAll" class="form-control ButtonColor"
+                                            value="Clear" onclick="ClearAWBDetails();">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblAwbNoFoundCargo" for="txtAWBNo">AWB No.</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-2" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtAWBPrefix" class="form-control" type="number"
+                                            style="text-align:right;"
+                                            onkeyup="NumberOnly(event); ChkMaxLength(this, '3');">
+                                    </div>
+                                    <div class="col-xs-4" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtAWBNo" class="form-control" type="number"
+                                            style="text-align:right;"
+                                            onkeyup="NumberOnly(event); ChkMaxLength(this, '8');"
+                                            onchange="GetShipmentInfoForAWB($('#txtAWBNo').val());">
+                                    </div>
+                                    <!--<div class="col-xs-1" style="padding-left:0px;padding-right:0px;">-->
+                                    <!--<input id="txtPriorityCode" class="form-control" type="number" style="text-align:right;" onkeyup="NumberOnly(event); ChkMaxLength(this, '3');">-->
+                                    <!--<input id="txtPriorityCode" class="form-control" type="text" maxlength="2" disabled>
+                                    </div>-->
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblPkgsFoundCargo" for="txtPackages">Packages</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-6" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtPackages" class="form-control" type="number"
+                                            style="text-align:right;" onchange="CalculateWtforFoundCargo();">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblWeightFoundCargo" for="txtWeight_FC">Weight</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-6" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtWeight_FC" class="form-control" type="number"
+                                            style="text-align:right;">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblOriginFoundCargo" for="txtOrigin_FC">Origin</label>
+                                    </div>
+                                    <div class="col-xs-6" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtOrigin_FC" class="form-control" type="text"
+                                            style="text-align:right;">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblDestFoundCargo" for="txtDestination_FC">Destination</label>
+                                    </div>
+                                    <div class="col-xs-6" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtDestination_FC" class="form-control" type="text"
+                                            style="text-align:right;">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblLocFoundCargo" for="txtLocation_FC">Location</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-6" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtLocation_FC" class="form-control" type="text"
+                                            style="text-align:right;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="divShowGrid" class="form-group col-xs-12 col-sm-12 col-md-12 NoPadding">
+
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 5px;">
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnSave" class="form-control ButtonColor" value="Submit"
+                                        onclick="SaveFoundCargoDetails();">
+                                </div>
+
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnExit" class="form-control ButtonColor" value="Back"
+                                        onclick="ShowULDGridFromFoundCargo();">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-widget forms-panel form-grids widget-shadow" id="divDamagedCargo"
+                style="display:none">
+                <div class="forms">
+                    <div class="form-body">
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblDamAWB" for="txtDamAWBNo">AWB No.</label>
+                                    </div>
+                                    <div class="col-xs-2" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtAWBPrefixDam" class="form-control" type="number"
+                                            style="text-align:right;" disabled>
+                                    </div>
+                                    <div class="col-xs-4" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtAWBNoDam" class="form-control" type="number"
+                                            style="text-align:right;" disabled>
+                                    </div>
+                                    <!--<div class="col-xs-1" style="padding-left:0px;padding-right:0px;">-->
+                                    <!--<input id="txtPriorityCode" class="form-control" type="number" style="text-align:right;" onkeyup="NumberOnly(event); ChkMaxLength(this, '3');">-->
+                                    <!--<input id="txtPriorityCode" class="form-control" type="text" maxlength="2" disabled>
+                                    </div>-->
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblDamPcs" for="txtDamPackages">Pieces</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-6" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtDamPackages" class="form-control" type="number"
+                                            style="text-align:right;">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <label id="lblDamWt" for="txtDamWeight">Weight</label>
+                                        <font color="red">*</font>
+                                    </div>
+                                    <div class="col-xs-6" style="padding-left:0px;padding-right:0px;">
+                                        <input id="txtDamWeight" class="form-control" type="number"
+                                            style="text-align:right;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-12 col-form-label">
+                                        <label id="lblTypPackaging">Type of Packaging</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 NoPadding">
+                                    <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                        <select id="packagingtype" multiple="multiple" name="basic[]"
+                                            class="clspackagingtype"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-12 col-form-label">
+                                        <label id="lblTypContainer">Type of Container</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12 NoPadding">
+                                    <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                        <select id="containertype" multiple="multiple" name="basic[]"
+                                            class="clscontainertype"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-12 col-form-label">
+                                        <label id="lblTypPackMaterial">Type of Packaging Material</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 NoPadding">
+                                    <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                        <select id="material" multiple="multiple" name="basic[]"
+                                            class="clsmaterial"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-12 col-form-label">
+                                        <label id="lblTypPackDamage">Type of Damage to Packaging</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 NoPadding">
+                                    <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                        <select id="damagetype" multiple="multiple" name="basic[]"
+                                            class="clsdamagetype"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-12 col-form-label">
+                                        <label id="lblTypDamageContent">Type of Damaged Content</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 NoPadding">
+                                    <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                        <select id="damagecontent" multiple="multiple" name="basic[]"
+                                            class="clsdamagecontent"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-12 col-form-label">
+                                        <label id="lblAaparentDamage">Damage aaparently caused by</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 NoPadding">
+                                    <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                        <select id="damagecause" multiple="multiple" name="basic[]"
+                                            class="clsdamagecause"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-12 col-form-label">
+                                        <label id="lblFurtherHandle">Further Handling</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 NoPadding">
+                                    <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                        <select id="handling" multiple="multiple" name="basic[]"
+                                            class="clshandling"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-12 col-form-label">
+                                        <label id="lblDamfirstnotice">Damage first noticed</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 NoPadding">
+                                    <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                        <select id="damagenotice" multiple="multiple" name="basic[]"
+                                            class="clsdamagenotice"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-12 col-form-label">
+                                        <label id="lblMarksLabels">Marks and Labels</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 NoPadding">
+                                    <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                        <select id="markslabels" multiple="multiple" name="basic[]"
+                                            class="clsmarkslabels"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-12 col-form-label">
+                                        <label id="lblTheftSigns">Signs of Theft</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-6 col-form-label">
+                                        <input type="radio" name="TheftSign" id="chkYes" />
+                                        <label id="lblTheftYes" for="SealTruck">Yes</label>
+                                    </div>
+                                    <div class="col-xs-6 col-form-label">
+                                        <input type="radio" id="chkNo" name="TheftSign" />
+                                        <label id="lblTheftNo" for="chkNotSealed">No</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                    <div class="col-xs-12 col-form-label">
+                                        <label id="lblRemarks">Remarks:</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 NoPadding">
+                                    <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
+                                        <input type="text" id="txtDamRemarks" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row form-group" style="margin-top:10px;">
+                                <div class="col-xs-6 col-form-label">
+                                    <label id="lblUploadDoc" class="control-label labelFont">Upload Documents</label>
+                                </div>
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="cameraTakePicture" class="form-control ButtonColor"
+                                        value="Upload">
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 5px;">
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnDamSave" class="form-control ButtonColor" value="Submit"
+                                        onclick="SaveDamageDetails();">
+                                </div>
+
+                                <div class="form-group col-xs-6 col-sm-4 col-md-4">
+                                    <input type="button" id="btnDamExit" class="form-control ButtonColor" value="Back"
+                                        onclick="ShowULDGridFromDamageCargo();">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <footer class="footer" style="color: white; font-size :12px; background-color:#0967b0;">
+            <div class="container">
+                <center>
+                    <p class="text-muted" id="RightsReserved"></p>
+                </center>
+            </div>
+        </footer>
+    </div>
+</body>
+<script language="javascript" type="text/javascript">
+    $('#RightsReserved').text(' \xA9 Kale Logistics Solutions Private Limited. ' + (new Date).getFullYear().toString());
+</script>
+
+</html>
