@@ -32,7 +32,8 @@
 
 //var baseURL = "https://siginongha.kalelogistics.com/Live/";
 
-var baseURL = "https://mitchellcottsuat.kalelogistics.com/UATHHT/";
+//var baseURL = "https://mitchellcottsuat.kalelogistics.com/UATHHT/";
+var baseURL = "https://siginongalaxyuat.kalelogistics.com/UAT/";
 //var baseURL = "https://mitchellcottsuat.kalelogistics.com/UAT/";
 //var baseURL =  "http://galaxyuatweb.westeurope.cloudapp.azure.com/siginonUAT/";
 //Signon

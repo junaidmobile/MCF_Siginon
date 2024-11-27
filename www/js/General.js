@@ -232,6 +232,17 @@ function LoadNavBar() {
         else if (language == 'Turkish')
             $('#navhdrName').html("Haasar Kaydi");
     }
+
+    else if (window.location.pathname.split("/").pop() == "EXP_CargoAcceptanceSiginon.html") {
+        if (language == 'English')
+            $('#navhdrName').html("Cargo Acceptance");
+        else if (language == 'German')
+            $('#navhdrName').html("Schaden aufnehmen");
+        else if (language == 'Russian')
+            $('#navhdrName').html("наносить ущерб");
+        else if (language == 'Turkish')
+            $('#navhdrName').html("Haasar Kaydi");
+    }
 }
 function NumberOnly(e) {
     e.target.value = e.target.value.replace(/[^0-9\.]/g, '');

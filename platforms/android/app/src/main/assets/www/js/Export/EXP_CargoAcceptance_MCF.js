@@ -449,7 +449,7 @@ function removeRow(counter) {
     //    return false;
     //}
 
-  
+
 
     $("#TextBoxDiv" + counter).remove();
     inputRowsforDim = "";
@@ -1497,7 +1497,7 @@ function GetULDDetailsforAWB() {
                     }
 
                 });
-                gridXMLforShow = '<Root><AWBNo>' + AWB + '</AWBNo><ShipmentNo>' + SHIPMENT_NUMBER + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                gridXMLforShow = '<Root><AWBNo>' + $("#ddlAWBNo option:selected").text() + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + $("#ddlShipmentNo").val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>';
 
                 CargoAcceptance_GetAcceptedList(gridXMLforShow);
 
@@ -1629,9 +1629,9 @@ function GetAWBDetailsforVCT() {
                 //    if (test) $(this).remove();
                 //});
 
-                gridXMLforShow = '<Root><AWBNo>' + AWB + '</AWBNo><ShipmentNo>' + SHIPMENT_NUMBER + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                //gridXMLforShow = '<Root><AWBNo>' + AWB + '</AWBNo><ShipmentNo>' + SHIPMENT_NUMBER + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
 
-                CargoAcceptance_GetAcceptedList(gridXMLforShow);
+                //CargoAcceptance_GetAcceptedList(gridXMLforShow);
 
             },
             error: function (msg) {
@@ -1773,8 +1773,8 @@ function GetAWBDetailsForULD(ULDid) {
 
 
                     var hdnValue = $('#ddlULDNo').val().split('~');
-                    gridXMLforShow = '<Root><AWBNo>' + hdnValue[1] + '</AWBNo><ShipmentNo>' + hdnValue[2] + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
-
+                    gridXMLforShow = '<Root><AWBNo>' + hdnValue[1] + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + hdnValue[2] + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                    // gridXMLforShow = '<Root><AWBNo>' + AWB + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + SHIPMENT_NUMBER + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>';
                     CargoAcceptance_GetAcceptedList(gridXMLforShow);
 
                 });
@@ -2056,7 +2056,7 @@ function GetShipmentDetailsVCTWithVCT(AWBid) {
                     Remarks = $(this).find('Remarks').text();
                     TemperatureUnit = $(this).find('TemperatureUnit').text().trim();
                     commSrNO = $(this).find('commSrNO').text();
-                   // $('#txtTemperature').val(Temperature);
+                    // $('#txtTemperature').val(Temperature);
                     if (commSrNO != '' || commSrNO != null) {
                         passCommoId = commSrNO;
                     }
@@ -2089,7 +2089,7 @@ function GetShipmentDetailsVCTWithVCT(AWBid) {
 
 
                 });
-                gridXMLforShow = '<Root><AWBNo>' + AWBNo + '</AWBNo><ShipmentNo>' + ShpmentNo + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                gridXMLforShow = '<Root><AWBNo>' + AWBNo + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + ShpmentNo + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
 
                 CargoAcceptance_GetAcceptedList(gridXMLforShow);
             },
@@ -2117,7 +2117,7 @@ function GetShipmentDetailsVCTWithVCT(AWBid) {
 
 
 function GetShipmentDetailsVCT(AWBid) {
-    
+
     var inputxml = "";
 
     var connectionStatus = navigator.onLine ? 'online' : 'offline'
@@ -2132,7 +2132,7 @@ function GetShipmentDetailsVCT(AWBid) {
 
     inputxml = '<Root><AWBNo>' + $("#ddlAWBNo option:selected").text() + '</AWBNo><ShipmentNo>' + AWBid + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>';
 
-   // $('#ddlShipmentNo').empty();
+    // $('#ddlShipmentNo').empty();
 
     if (errmsg == "" && connectionStatus == "online") {
         $.ajax({
@@ -2232,7 +2232,7 @@ function GetShipmentDetailsVCT(AWBid) {
 
 
                 });
-                gridXMLforShow = '<Root><AWBNo>' + AWBNo + '</AWBNo><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                gridXMLforShow = '<Root><AWBNo>' + AWBNo + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
 
                 CargoAcceptance_GetAcceptedList(gridXMLforShow);
             },
@@ -2315,7 +2315,7 @@ function GetShipmentDetailsAWB(AWBid) {
                     }
 
                 });
-                gridXMLforShow = '<Root><AWBNo>' + AWBid + '</AWBNo><ShipmentNo>' + ShpmentNo + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                gridXMLforShow = '<Root><AWBNo>' + AWBid + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + ShpmentNo + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
 
                 CargoAcceptance_GetAcceptedList(gridXMLforShow);
             },
@@ -2414,8 +2414,8 @@ function GetShipmentDetailsAWBWith_VCT(HOUSE_SEQUENCE_NO) {
                         if (Temperature != '') {
                             $('#txtTemperature').val(Temperature);
                         }
-                        
-                       
+
+
 
                         if (commSrNO != '' || commSrNO != null) {
                             passCommoId = commSrNO;
@@ -2439,7 +2439,7 @@ function GetShipmentDetailsAWBWith_VCT(HOUSE_SEQUENCE_NO) {
                         SHCSpanHtml(SHC);
                         $('#dvForEditBtn').show();
 
-                        gridXMLforShow = '<Root><AWBNo>' + $('#ddlAWBNo :selected').text() + '</AWBNo><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                        gridXMLforShow = '<Root><AWBNo>' + $('#ddlAWBNo :selected').text() + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
 
                         CargoAcceptance_GetAcceptedList(gridXMLforShow);
                         return;
@@ -2549,7 +2549,7 @@ function GetShipmentDetailsAWBWithHouse(HOUSE_SEQUENCE_NO) {
                         if (Temperature != '') {
                             $('#txtTemperature').val(Temperature);
                         }
-                       // $('#txtCommodity').val(COMMODITY_TYPE);
+                        // $('#txtCommodity').val(COMMODITY_TYPE);
                         if (DESCRIPTION != '') {
                             $('#txtDescription').val(DESCRIPTION);
                         }
@@ -2578,7 +2578,7 @@ function GetShipmentDetailsAWBWithHouse(HOUSE_SEQUENCE_NO) {
 
                 //CargoAcceptance_GetAcceptedList(gridXMLforShow);
 
-                gridXMLforShow = '<Root><AWBNo>' + $('#ddlAWBNo :selected').text() + '</AWBNo><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                gridXMLforShow = '<Root><AWBNo>' + $('#ddlAWBNo :selected').text() + '</AWBNo><House_seq_no>' + HOUSE_SEQUENCE_NO + '</House_seq_no><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
 
                 CargoAcceptance_GetAcceptedList(gridXMLforShow);
             },
@@ -2676,9 +2676,9 @@ function GetShipmentRelatedDetails(ShipmentId) {
                             $('#txtRemark').val(Remarks);
                         }
 
-                       
-                       
-                        
+
+
+
 
                         $("#TextBoxDiv").empty();
                         _XmlForSHCCode = SHC;
@@ -2690,7 +2690,7 @@ function GetShipmentRelatedDetails(ShipmentId) {
 
                 clearAllValuesfromDimention();
 
-                gridXMLforShow = '<Root><AWBNo>' + $('#ddlAWBNo :selected').text() + '</AWBNo><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                gridXMLforShow = '<Root><AWBNo>' + $('#ddlAWBNo :selected').text() + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
 
                 CargoAcceptance_GetAcceptedList(gridXMLforShow);
 
@@ -2788,7 +2788,7 @@ function ValidateSHCCodes() {
                                     if ($('#ddlShipmentNo').val() != '0') {
                                         $('#ddlShipmentNo').trigger('change');
                                     }
-                                   
+
                                 }
 
                             }
@@ -3489,23 +3489,23 @@ function SaveDetails() {
 
                                     awbClear();
 
-                                    gridXMLforShow = '<Root><AWBNo>' + $('#ddlAWBNo :selected').text() + '</AWBNo><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                                    gridXMLforShow = '<Root><AWBNo>' + $('#ddlAWBNo :selected').text() + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
 
                                     CargoAcceptance_GetAcceptedList(gridXMLforShow);
                                 } else {
                                     var hdnValue = $('#ddlULDNo').val().split('~');
-                                    gridXMLforShow = '<Root><AWBNo>' + hdnValue[1] + '</AWBNo><ShipmentNo>' + hdnValue[2] + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                                    gridXMLforShow = '<Root><AWBNo>' + hdnValue[1] + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + hdnValue[2] + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
                                     CargoAcceptance_GetAcceptedList(gridXMLforShow);
                                 }
 
                             } else {
                                 if (AcceptanceText == "AWB") {
-                                    gridXMLforShow = '<Root><AWBNo>' + $('#ddlAWBNo :selected').text() + '</AWBNo><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                                    gridXMLforShow = '<Root><AWBNo>' + $('#ddlAWBNo :selected').text() + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
 
                                     CargoAcceptance_GetAcceptedList(gridXMLforShow);
                                 } else {
                                     var hdnValue = $('#ddlULDNo').val().split('~');
-                                    gridXMLforShow = '<Root><AWBNo>' + hdnValue[1] + '</AWBNo><ShipmentNo>' + hdnValue[2] + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                                    gridXMLforShow = '<Root><AWBNo>' + hdnValue[1] + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + hdnValue[2] + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
                                     CargoAcceptance_GetAcceptedList(gridXMLforShow);
                                 }
                             }
@@ -3541,7 +3541,7 @@ function SaveDetails() {
                                     $('#ddlAWBNo').trigger('change');
                                 }
 
-                                
+
 
                             }
 
@@ -3549,7 +3549,7 @@ function SaveDetails() {
 
                             if (DimensionsStatus == true) {
                                 $("#btnSave").attr("disabled", "disabled");
-                               
+
                             }
                         } else {
                             $("body").mLoading('hide');
@@ -3800,23 +3800,23 @@ function CargoAcceptance_Delete_AcceptedListRow(RowId) {
                             if (radioValue == "vct") {
                                 if (AcceptanceText == "AWB") {
 
-                                    gridXMLforShow = '<Root><AWBNo>' + $('#ddlAWBNo :selected').text() + '</AWBNo><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                                    gridXMLforShow = '<Root><AWBNo>' + $('#ddlAWBNo :selected').text() + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
 
                                     CargoAcceptance_GetAcceptedList(gridXMLforShow);
                                 } else {
                                     var hdnValue = $('#ddlULDNo').val().split('~');
-                                    gridXMLforShow = '<Root><AWBNo>' + hdnValue[1] + '</AWBNo><ShipmentNo>' + hdnValue[2] + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                                    gridXMLforShow = '<Root><AWBNo>' + hdnValue[1] + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + hdnValue[2] + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
                                     CargoAcceptance_GetAcceptedList(gridXMLforShow);
                                 }
 
                             } else {
                                 if (AcceptanceText == "AWB") {
-                                    gridXMLforShow = '<Root><AWBNo>' + $('#ddlAWBNo :selected').text() + '</AWBNo><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                                    gridXMLforShow = '<Root><AWBNo>' + $('#ddlAWBNo :selected').text() + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + $('#ddlShipmentNo').val() + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
 
                                     CargoAcceptance_GetAcceptedList(gridXMLforShow);
                                 } else {
                                     var hdnValue = $('#ddlULDNo').val().split('~');
-                                    gridXMLforShow = '<Root><AWBNo>' + hdnValue[1] + '</AWBNo><ShipmentNo>' + hdnValue[2] + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
+                                    gridXMLforShow = '<Root><AWBNo>' + hdnValue[1] + '</AWBNo><House_seq_no>' + $("#ddlHAWBNo").val() + '</House_seq_no><ShipmentNo>' + hdnValue[2] + '</ShipmentNo><AirportCity>' + AirportCity + '</AirportCity></Root>'
                                     CargoAcceptance_GetAcceptedList(gridXMLforShow);
                                 }
                             }
@@ -3873,7 +3873,7 @@ function OpenDimensions() {
     //    return;
     //}
     if ($('#ddlAcceptance').val() == 1) {
-       // $("#addButton").attr("disabled", "disabled");
+        // $("#addButton").attr("disabled", "disabled");
         // $("#Pieces1").attr("disabled", "disabled");
         //$("#Pieces1").val('1');
     } else {
@@ -3982,14 +3982,14 @@ function clearALLControlsonOnchangeVCT() {
 }
 
 function clearOnchangeAWBDDL() {
-    
+
 
     $('#txtDescription').val('');
     $('#txtRemark').val('');
     $('#txtTemperature').val('');
     $('#ddlTemperatureUnit').val('C');
     $('#txtCommodity').val('');
-    
+
 
     $('#txtPackages').val('');
     $('#txtGrossWt').val('');

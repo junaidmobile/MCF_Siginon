@@ -8,6 +8,11 @@ $(function () {
         $('#divSigCar').hide();
         $('#divOldCar').hide();
     }
+    if (Client_Name == 'SIGINON') {
+        $('#divMCFCar').hide();
+        $('#divSigCar').show();
+        $('#divOldCar').hide();
+    }
     switch (language) {
         case "English":
             setEnglish();
