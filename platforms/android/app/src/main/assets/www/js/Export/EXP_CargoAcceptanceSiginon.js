@@ -3114,6 +3114,7 @@ function VehicleNumberValidation() {
 
 function clearAll() {
     $("#txtVCTNo").val("");
+    $("#txtDOB").val("");
     $("#acceptedListTable").hide();
     $("#ddlOrigin").empty();
     $("#ddlscaleName").val("0");
@@ -3463,7 +3464,8 @@ function HHT_ExpGet_CargoAcceptance_Ship_AWBDetails(shipNo) {
                 Result = Result.d;
                 var xmlDoc = $.parseXML(Result);
                 console.log("VCT With AWB");
-
+                var Loose = '';
+                debugger
                 $(xmlDoc)
                     .find("Table")
                     .each(function (index) {
@@ -3486,9 +3488,17 @@ function HHT_ExpGet_CargoAcceptance_Ship_AWBDetails(shipNo) {
                 $(xmlDoc)
                     .find("Table1")
                     .each(function (index) {
-                        var loose = $(this).find("Loose").text();
+                        loose = $(this).find("Loose").text();
+                        var ULDType = $(this).find("ULDType").text();
+                        var ULDNumber = $(this).find("ULDNumber").text();
+                        var ULDOwner = $(this).find("ULDOwner").text();
+                        var ULDSeqNo = $(this).find("ULDSeqNo").text();
+                        var ULDCount = $(this).find("ULDCount").text();
+                        var SEQ_NO = $(this).find("SEQ_NO").text();
 
-                        console.log("Loose:", loose);
+                        $("#txtULDTyped").val(ULDType);
+                        $("#txtULDNumber").val(ULDNumber);
+                        $("#txtOwner").val(ULDOwner);
                     });
 
                 $(xmlDoc)
@@ -3501,6 +3511,9 @@ function HHT_ExpGet_CargoAcceptance_Ship_AWBDetails(shipNo) {
                         var shipExpWt = $(this).find("Ship_ExpWt").text();
                         var destination = $(this).find("Destination").text();
                         var agent = $(this).find("AgentName").text();
+                        var Offpoint = $(this).find("Offpoint").text();
+
+
 
                         // $("#txtAWBNo").val(awbNo);
                         $("#txtAWBpkgs").val(awbNpx);
@@ -3510,7 +3523,28 @@ function HHT_ExpGet_CargoAcceptance_Ship_AWBDetails(shipNo) {
                         $("#ddlDestination").val(destination);
                         //$("#ddlOffPoints").val("123");
                         $("#txtCustomerName").val(agent);
+                        $("#ddlOffPoints").val(Offpoint);
+
                     });
+
+                if (loose == '') {
+                    $("#chkULD").prop('checked', true);
+                    $("#divBulk").hide();
+                    $("#divUldTyped").show();
+                    $("#divUldNo").show();
+                    $("#divUldOwner").show();
+                    $("#txtBulk").val("");
+                } else {
+                    $("#chkLoose").prop('checked', true);
+                    $("#divBulk").show();
+                    $("#divUldTyped").hide();
+                    $("#divUldNo").hide();
+                    $("#divUldOwner").hide();
+                    $("#txtBulk").val("BULK");
+                    $("#txtULDTyped").val("");
+                    $("#txtULDNumber").val("");
+                    $("#txtOwner").val("");
+                }
 
                 // $(xmlDoc).find('Table3').each(function (index) {
 
@@ -3631,11 +3665,15 @@ function clearOnchanheShipmentData() {
     $("#ddlEquipmentType").val('0');
     $("#ddlEquipmentType").trigger('change');
     $("#txtTareWt").val('');
-    //$("#txtDescription").val('');
-    //$("#txtRemark").val('');
+    $("#ddlULDSK1").val('0');
+    $("#ddlscaleName").val('0');
+    $("#ddlscaleName").val('0');
 }
 
 function HHT_ExpGet_CargoAcceptance_AWBDetails() {
+    
+    $("#txtReceivedPkgs").val('');
+    $("#txtReceivedGrossWt").val('');
     var MAWBNo = $("#txtAWBNo").val();
     if (MAWBNo == "") {
         return;
@@ -3699,7 +3737,7 @@ function HHT_ExpGet_CargoAcceptance_AWBDetails() {
                         var vehicleNo = $(this).find("VEHICLE_NO").text();
                         // var isComplete = $(this).find('ISCOMPLETE').text();
                         var driverDob = $(this).find("Driver_DOB").text();
-
+                        var loose = '';
                         if ($(this).find("Status").text() != "E") {
                             // $.alert('AWB already exist');
                             // $('#txtAWBNo').val('');
@@ -3718,9 +3756,41 @@ function HHT_ExpGet_CargoAcceptance_AWBDetails() {
                                         $(xmlDoc)
                                             .find("Table1")
                                             .each(function (index) {
-                                                var loose = $(this).find("Loose").text();
+                                                loose = $(this).find("Loose").text();
                                                 console.log("Loose:", loose);
+
+                                                var ULDType = $(this).find("ULDType").text();
+                                                var ULDNumber = $(this).find("ULDNumber").text();
+                                                var ULDOwner = $(this).find("ULDOwner").text();
+                                                var ULDSeqNo = $(this).find("ULDSeqNo").text();
+                                                var ULDCount = $(this).find("ULDCount").text();
+                                                var SEQ_NO = $(this).find("SEQ_NO").text();
+
+                                                $("#txtULDTyped").val(ULDType);
+                                                $("#txtULDNumber").val(ULDNumber);
+                                                $("#txtOwner").val(ULDOwner);
+
+
                                             });
+
+                                        if (loose == '') {
+                                            $("#chkULD").prop('checked', true);
+                                            $("#divBulk").hide();
+                                            $("#divUldTyped").show();
+                                            $("#divUldNo").show();
+                                            $("#divUldOwner").show();
+                                            $("#txtBulk").val("");
+                                        } else {
+                                            $("#chkLoose").prop('checked', true);
+                                            $("#divBulk").show();
+                                            $("#divUldTyped").hide();
+                                            $("#divUldNo").hide();
+                                            $("#divUldOwner").hide();
+                                            $("#txtBulk").val("BULK");
+                                            $("#txtULDTyped").val("");
+                                            $("#txtULDNumber").val("");
+                                            $("#txtOwner").val("");
+                                        }
 
                                         $(xmlDoc)
                                             .find("Table2")
@@ -3736,7 +3806,7 @@ function HHT_ExpGet_CargoAcceptance_AWBDetails() {
                                                 var Remarks = $(this).find("Remarks").text();
                                                 var SHC = $(this).find("SHC").text();
                                                 var AgentCode = $(this).find("AgentCode").text();
-                                                // var AgentName = $(this).find("AgentName").text();
+                                                var Offpoint = $(this).find("Offpoint").text();
                                                 if (AgentCode != '') {
                                                     passCustomerID = AgentCode;
                                                 }
@@ -3761,7 +3831,8 @@ function HHT_ExpGet_CargoAcceptance_AWBDetails() {
                                                 $("#txtCustomerName").val(agent);
                                                 $("#txtDescription").val(DESCRIPTION);
                                                 $("#txtRemark").val(Remarks);
-                                                $("#txtRemark").val(Remarks);
+                                                // $("#txtRemark").val(Remarks);
+                                                $("#ddlOffPoints").val(Offpoint);
                                             });
                                         let lastValue = 0;
                                         $(xmlDoc)
@@ -3951,12 +4022,12 @@ function getAWBDetailsAfterSave() {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (Result) {
-                debugger
+
                 Result = Result.d;
                 var xmlDoc = $.parseXML(Result);
                 console.log("HHT_ExpGet_CargoAcceptance_AWBDetails after save");
                 $("#ddlShipmentNo").empty();
-               
+
                 $(xmlDoc)
                     .find("Table")
                     .each(function (index) {
@@ -3998,6 +4069,7 @@ function getAWBDetailsAfterSave() {
                                     var shipExpWt = $(this).find("Ship_ExpWt").text();
                                     var destination = $(this).find("Destination").text();
                                     var agent = $(this).find("AgentName").text();
+                                    var Offpoint = $(this).find("Offpoint").text();
 
                                     // $("#txtAWBNo").val(awbNo);
                                     $("#txtAWBpkgs").val(awbNpx);
@@ -4005,7 +4077,7 @@ function getAWBDetailsAfterSave() {
                                     // $("#txtShipNPX").val(shipNpx);
                                     // $("#txtShipExpWt").val(shipExpWt);
                                     $("#ddlDestination").val(destination);
-                                    $("#ddlOffPoints").val(destination);
+                                    $("#ddlOffPoints").val(Offpoint);
                                     $("#txtCustomerName").val(agent);
                                     const match = agent.match(/\[(\d+)\]/);
                                     if (match) {
@@ -4369,6 +4441,13 @@ function HHT_ExpCargoAcceptance_SaveDetails() {
         $.alert(errmsg);
         return;
     }
+
+    if (passCustomerID == undefined || passCustomerID == null) {
+        errmsg = "Please select valid Customer Name";
+        $.alert(errmsg);
+        return;
+    }
+
     if ($("#txtAirline").val() == "") {
         errmsg = "Please enter Airline";
         $.alert(errmsg);
@@ -4547,47 +4626,21 @@ function HHT_ExpCargoAcceptance_SaveDetails() {
                             EXP_CargoAcceptance_GetAcceptedList($("#ddlShipmentNo").val());
                             getAWBDetailsAfterSave();
                             clearOnchanheShipmentData();
+                            var $input;
+
+                            $('#TextBoxesGroup').find('input').each(function (i, input) {
+                                $(this).val('');
+                            });
+
                             return;
                         }
 
-                        ShpmentId = $(this).find("SHIPMENT_NUMBER").text();
-                        ShpmentNo = $(this).find("SHIPMENT_NUMBER").text();
-                        AWBNo = $(this).find("AWBNo").text();
-
-                        if (index == 0) {
-                            var newOption = $("<option></option>");
-                            newOption.val("0").text("Select");
-                            newOption.appendTo("#ddlShipmentNo");
-                        }
-
-                        var newOption = $("<option></option>");
-                        newOption.val(ShpmentId).text(ShpmentNo);
-                        newOption.appendTo("#ddlShipmentNo");
-
-                        $("#ddlShipmentNo option")
-                            .filter(function () {
-                                return (
-                                    $(this).val().trim() == "" && $(this).text().trim() == ""
-                                );
-                            })
-                            .remove();
-
-                        var a = new Array();
-                        $("#ddlShipmentNo")
-                            .children("option")
-                            .each(function (x) {
-                                test = false;
-                                b = a[x] = $(this).text();
-                                for (i = 0; i < a.length - 1; i++) {
-                                    if (b == a[i]) test = true;
-                                }
-                                if (test) $(this).remove();
-                            });
                     });
             },
             error: function (msg) {
-                $("body").mLoading("hide");
-                $.alert("Data could not be loaded");
+                $("body").mLoading('hide');
+                var r = jQuery.parseJSON(msg.responseText);
+                $.alert("Message: " + r.Message);
             },
         });
         return false;

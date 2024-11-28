@@ -235,7 +235,7 @@ function LoadNavBar() {
 
     else if (window.location.pathname.split("/").pop() == "EXP_CargoAcceptanceSiginon.html") {
         if (language == 'English')
-            $('#navhdrName').html("Cargo Acceptance");
+            $('#navhdrName').html("VCT Generation");
         else if (language == 'German')
             $('#navhdrName').html("Schaden aufnehmen");
         else if (language == 'Russian')
