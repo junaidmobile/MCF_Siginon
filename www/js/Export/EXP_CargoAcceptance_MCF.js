@@ -1044,13 +1044,14 @@ function EnableDimensions() {
         $("#myBtnDimensions").removeAttr("disabled");
         $("#myBtnDimensionsduplicate").show();
         $("#myBtnDimensions").hide();
+        inputRowsforDim = '';
     }
 
     if (DimensionsStatus == true) {
         $("#btnSave").attr("disabled", "disabled");
         $("#myBtnDimensionsduplicate").hide();
         $("#myBtnDimensions").show();
-
+        inputRowsforDim = '';
 
     }
 }

@@ -30,6 +30,10 @@
     },
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "com.GALAXY"
+    },
+    "cordova-plugin-sunmi-inner-printer": {
+      "ANDROID_SUPPORT_V13_VERSION": "27.+",
+      "PACKAGE_NAME": "com.GALAXY"
     }
   },
   "dependent_plugins": {}

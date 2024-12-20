@@ -22,7 +22,10 @@
       "cordova-plugin-camera": {},
       "cordova-plugin-barcodescanner": {},
       "cordova-plugin-bluetooth-serial": {},
-      "cordova-plugin-inappbrowser": {}
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-sunmi-inner-printer": {
+        "ANDROID_SUPPORT_V13_VERSION": "27.+"
+      }
     },
     "platforms": [
       "windows",
@@ -31,6 +34,7 @@
   },
   "devDependencies": {
     "cordova-android": "^8.1.0",
-    "cordova-plugin-inappbrowser": "^4.1.0"
+    "cordova-plugin-inappbrowser": "^4.1.0",
+    "cordova-plugin-sunmi-inner-printer-v2-v2pro": "github:rijeshpk/cordova-plugin-sunmi-inner-printer-v2-v2pro"
   }
 }

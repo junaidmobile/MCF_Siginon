@@ -30,6 +30,9 @@
     },
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "GALAXY"
+    },
+    "cordova-plugin-sunmi-inner-printer": {
+      "PACKAGE_NAME": "GALAXY"
     }
   },
   "dependent_plugins": {

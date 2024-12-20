@@ -70,5 +70,13 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-sunmi-inner-printer": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/rijeshpk/cordova-plugin-sunmi-inner-printer-v2-v2pro.git"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

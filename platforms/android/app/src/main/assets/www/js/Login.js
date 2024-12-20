@@ -34,7 +34,7 @@
 
 //var baseURL = "https://mitchellcottsuat.kalelogistics.com/UATHHT/";
 var baseURL = "https://siginongalaxyuat.kalelogistics.com/UAT/";
-//var baseURL = "https://mitchellcottsuat.kalelogistics.com/UAT/";
+//var baseURL = "https://siginongha.kalelogistics.com/Live/";
 //var baseURL =  "http://galaxyuatweb.westeurope.cloudapp.azure.com/siginonUAT/";
 //Signon
 
@@ -139,7 +139,7 @@ function ProcessLogin() {
                         window.localStorage.setItem("SHED_AIRPORT_CITY", $(this).find('SHED_AIRPORT_CITY').text());
                         window.localStorage.setItem("SHED_CODE", $(this).find('SHED_CODE').text());
                         window.localStorage.setItem("Client_Name", $(this).find('Client_Name').text());
-                        
+
                         window.localStorage.setItem("GHAserviceURL", GHAserviceURL);
                         window.localStorage.setItem("GHAImportFlightserviceURL", GHAImportFlightserviceURL);
                         window.localStorage.setItem("GHAExportFlightserviceURL", GHAExportFlightserviceURL);

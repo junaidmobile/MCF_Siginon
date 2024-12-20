@@ -96,6 +96,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "cordova.InAppBrowser.open"
       ]
+    },
+    {
+      "id": "cordova-plugin-sunmi-inner-printer.InnerPrinter",
+      "file": "plugins/cordova-plugin-sunmi-inner-printer/www/innerprinter.js",
+      "pluginId": "cordova-plugin-sunmi-inner-printer",
+      "clobbers": [
+        "sunmiInnerPrinter"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -106,6 +114,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-network-information": "1.3.0",
     "cordova-plugin-splashscreen": "4.0.0",
     "cordova-plugin-whitelist": "1.3.3",
-    "cordova-plugin-inappbrowser": "4.1.0"
+    "cordova-plugin-inappbrowser": "4.1.0",
+    "cordova-plugin-sunmi-inner-printer": "1.1.1"
   };
 });

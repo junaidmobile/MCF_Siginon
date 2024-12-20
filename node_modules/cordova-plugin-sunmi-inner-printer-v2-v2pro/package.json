@@ -1,0 +1,26 @@
+{
+  "name": "cordova-plugin-sunmi-inner-printer-v2-v2pro",
+  "description": "Cordova/Ionic Plugin for Sunmi V2, V2 Pro Printer",
+  "cordova": {
+    "id": "cordova-plugin-sunmi-inner-printer-v2-v2pro",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rijeshpk/cordova-plugin-sunmi-inner-printer-v2-v2pro.git"
+  },
+  "author": {
+    "name": "rpk"
+  },
+  "license": "DBAD",
+  "engines": {
+    "cordovaDependencies": {
+      "7.1.0": {
+        "cordova-android": ">=7.1.0"
+      }
+    }
+  },
+  "version": "1.0"
+}

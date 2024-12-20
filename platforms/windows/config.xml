@@ -45,4 +45,5 @@
     <preference name="android-minSdkVersion" value="19" />
     <preference name="android-targetSdkVersion" value="30" />
     <preference name="WindowsStoreDisplayName" value="GALAXY" />
+    <preference name="InAppBrowserStatusBarStyle" value="lightcontent" />
 </widget>

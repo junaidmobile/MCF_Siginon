@@ -308,7 +308,7 @@
 
                                 <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                     <div class="col-xs-6 col-form-label">
-                                        <label id="lblDOB" for="txtFlightDate">DOB</label>
+                                        <label id="lblDOB" for="txtDOB">Vehicle at Dock</label>
                                         <font color="red">*</font>
                                     </div>
                                     <div class="col-xs-6 NoPadding">
@@ -372,7 +372,7 @@
                                         <input id="txtULDNumber" class="form-control" type="number" style="text-align:right;" maxlength="5" onkeyup="NumberOnly(event); MovetoNext(this, 'txtOwner');ChkMaxLength(this, '5');" pattern="/^-?\d+\.?\d*$/">
                                     </div>
                                     <div class="col-xs-1 NoPadding" id="divUldOwner" style="display: none;">
-                                        <input id="txtOwner"  style="text-transform:uppercase;" class="form-control" type="text" maxlength="3">
+                                        <input id="txtOwner" style="text-transform:uppercase;" class="form-control" type="text" maxlength="3">
                                     </div>
 
                                     <div class="col-xs-6 NoPadding" id="divBulk">
@@ -397,7 +397,7 @@
                                         </select>-->
 
                                         <input id="txtAWBNo" class="form-control" type="number" autofocus autocomplete="off" maxlength="11"
-                                               style="text-align:right;" onkeyup="ChkMaxLength(this, '12'); getAirline();"
+                                               style="text-align:right;" onkeyup="ChkMaxLength(this, '11'); getAirline();"
                                                onblur="HHT_ExpGet_CargoAcceptance_AWBDetails();">
                                     </div>
                                 </div>
@@ -503,7 +503,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding" >
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 NoPadding">
                                     <div class="col-xs-6 col-form-label">
                                         <label id="lblDestination" for="ddlOffPoints">Off-Point</label>
                                         <font color="red">*</font>

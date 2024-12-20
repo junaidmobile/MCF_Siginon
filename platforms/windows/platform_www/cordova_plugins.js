@@ -122,6 +122,14 @@ module.exports = [
     "file": "plugins/cordova-plugin-inappbrowser/src/windows/InAppBrowserProxy.js",
     "pluginId": "cordova-plugin-inappbrowser",
     "runs": true
+  },
+  {
+    "id": "cordova-plugin-sunmi-inner-printer.InnerPrinter",
+    "file": "plugins/cordova-plugin-sunmi-inner-printer/www/innerprinter.js",
+    "pluginId": "cordova-plugin-sunmi-inner-printer",
+    "clobbers": [
+      "sunmiInnerPrinter"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -135,7 +143,8 @@ module.exports.metadata =
   "cordova-plugin-whitelist": "1.3.3",
   "cordova-plugin-barcodescanner": "0.7.4",
   "cordova-plugin-bluetooth-serial": "0.4.7",
-  "cordova-plugin-inappbrowser": "4.1.0"
+  "cordova-plugin-inappbrowser": "4.1.0",
+  "cordova-plugin-sunmi-inner-printer": "1.1.1"
 };
 // BOTTOM OF METADATA
 });
